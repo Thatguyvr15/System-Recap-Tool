@@ -23,3 +23,4 @@ How to Use
 3. View your system recap in the console and in the generated `SystemReport.txt`
 
 ---
+![image](https://github.com/user-attachments/assets/348d45c2-fd98-4fa7-a88a-4c4f546bbbc1)
