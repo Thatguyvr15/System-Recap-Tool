@@ -1,0 +1,64 @@
+@echo off
+title System Recap Tool - By ThatGuyVR15
+color 0A
+echo ============================================
+echo      SYSTEM RECAP TOOL - By ThatGuyVR15
+echo ============================================
+echo.
+pause
+
+:: Create / overwrite the log file
+set "log=SystemReport.txt"
+echo System Recap - %date% %time% > %log%
+echo ================================ >> %log%
+
+:: Computer Name
+echo Computer Name: %COMPUTERNAME%
+echo Computer Name: %COMPUTERNAME% >> %log%
+
+:: OS Version
+ver | find "Windows" >nul
+if %errorlevel%==0 (
+    ver | find "Windows"
+    ver | find "Windows" >> %log%
+)
+
+:: CPU Info
+echo.
+echo CPU Info:
+wmic cpu get Name,NumberOfCores,NumberOfLogicalProcessors
+echo CPU Info: >> %log%
+wmic cpu get Name,NumberOfCores,NumberOfLogicalProcessors >> %log%
+
+:: RAM Info
+echo.
+echo Total Physical Memory:
+wmic ComputerSystem get TotalPhysicalMemory
+echo Total Physical Memory: >> %log%
+wmic ComputerSystem get TotalPhysicalMemory >> %log%
+
+:: Disk Space
+echo.
+echo Disk Drives:
+wmic logicaldisk get Name,FileSystem,FreeSpace,Size
+echo Disk Drives: >> %log%
+wmic logicaldisk get Name,FileSystem,FreeSpace,Size >> %log%
+
+:: IP Config
+echo.
+echo IP Configuration:
+ipconfig | findstr /C:"IPv4"
+ipconfig >> %log%
+
+:: Battery Info
+echo.
+echo Battery Info:
+wmic path Win32_Battery get EstimatedChargeRemaining, BatteryStatus
+echo Battery Info: >> %log%
+wmic path Win32_Battery get EstimatedChargeRemaining, BatteryStatus >> %log%
+
+echo.
+echo Recap saved to %log%
+echo.
+pause
+exit
